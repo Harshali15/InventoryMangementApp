@@ -9,7 +9,8 @@
 <!-- binding syntax3- event binding, uses (eventName) to access the variable -->
 <div [hidden]="hiddenRoom">
     Number of rooms :
-    <div [innerText]="numRooms">Number of rooms</div>
+    <div [ngStyle]="numRooms>0 ? {'color':'green'} : {'color':'red'}"
+    [innerText]="numRooms">Number of rooms</div>
 </div>
 
 <button (click)="toggle()">Click Me</button>
@@ -39,7 +40,9 @@
             <th>Checkin</th>
             <th>Checkout</th>
         </tr>
-        <tr *ngFor="let room of roomList; let o = odd; let e = even; let i = index">
+        <tr 
+        [ngClass]="e ? 'even':'odd'"
+        *ngFor="let room of roomList; let o = odd; let e = even; let i = index">
             <td>{{i}}</td>  
             <td>{{o ? 'Even' : 'Odd'}}</td>
             <td>{{room.roomNumber}}</td>
