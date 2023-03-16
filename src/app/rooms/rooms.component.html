@@ -29,7 +29,7 @@
 </div>
 
 <!-- {{roomList | json}} -->
-<div>
+<!-- <div>
     <table class="table">
         <tr>
             <th>Index</th>
@@ -56,4 +56,6 @@
             <td>{{room.rating | number : '1.1-3' : 'en-us'}}</td>
         </tr>
     </table>
-</div>
+</div> -->
+
+<app-rooms-list [rooms]="roomList"></app-rooms-list>

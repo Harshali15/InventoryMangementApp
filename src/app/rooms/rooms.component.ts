@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Rooms, RoomsList } from './rooms';
 
 @Component({
@@ -6,8 +6,7 @@ import { Rooms, RoomsList } from './rooms';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent {
-e: any;
+export class RoomsComponent implements OnInit{
   constructor() { }
 
   //binding syntax 1- interpolation
@@ -31,39 +30,44 @@ e: any;
     //onholdRooms: 5  //comment to see chaining and null collision
   }
 
-  roomList : RoomsList[]= [
-    {
-      roomNumber:1,
-      roomType:'Deluxe Room',
-      ammenities: '1 King Bed, Wifi included',
-      price: 100,
-      image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
-      checkinTime: new Date(11-11-2021),
-      checkoutTime: new Date(12-11-2021),
-      rating: 4.7
-    },
-    {
-      roomNumber:2,
-      roomType:'Queen Room',
-      ammenities: '1 Queen Bed, Wifi included',
-      price: 200,
-      image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
-      checkinTime: new Date(11-11-2021),
-      checkoutTime: new Date(12-11-2021),
-      rating:3.12344
-    },
-    {
-      roomNumber:3,
-      roomType:'Deluxe King Room',
-      ammenities: '1 King Bed, Wifi included, Free Breakfast',
-      price: 1000,
-      image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
-      checkinTime: new Date(11-11-2021),
-      checkoutTime: new Date(12-11-2021),
-      rating:5.0
-    },
+  roomList : RoomsList[]= []
 
-  ]
+  ngOnInit(): void {
+
+    this.roomList=[
+      {
+        roomNumber:1,
+        roomType:'Deluxe Room',
+        ammenities: '1 King Bed, Wifi included',
+        price: 100,
+        image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
+        checkinTime: new Date(11-11-2021),
+        checkoutTime: new Date(12-11-2021),
+        rating: 4.7
+      },
+      {
+        roomNumber:2,
+        roomType:'Queen Room',
+        ammenities: '1 Queen Bed, Wifi included',
+        price: 200,
+        image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
+        checkinTime: new Date(11-11-2021),
+        checkoutTime: new Date(12-11-2021),
+        rating:3.12344
+      },
+      {
+        roomNumber:3,
+        roomType:'Deluxe King Room',
+        ammenities: '1 King Bed, Wifi included, Free Breakfast',
+        price: 1000,
+        image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
+        checkinTime: new Date(11-11-2021),
+        checkoutTime: new Date(12-11-2021),
+        rating:5.0
+      },
+  
+    ]
+  }
 
 
 
