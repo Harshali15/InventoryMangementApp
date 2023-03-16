@@ -39,7 +39,8 @@ e: any;
       price: 100,
       image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
       checkinTime: new Date(11-11-2021),
-      checkoutTime: new Date(12-11-2021)
+      checkoutTime: new Date(12-11-2021),
+      rating: 4.7
     },
     {
       roomNumber:2,
@@ -48,7 +49,8 @@ e: any;
       price: 200,
       image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
       checkinTime: new Date(11-11-2021),
-      checkoutTime: new Date(12-11-2021)
+      checkoutTime: new Date(12-11-2021),
+      rating:3.12344
     },
     {
       roomNumber:3,
@@ -57,7 +59,8 @@ e: any;
       price: 1000,
       image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
       checkinTime: new Date(11-11-2021),
-      checkoutTime: new Date(12-11-2021)
+      checkoutTime: new Date(12-11-2021),
+      rating:5.0
     },
 
   ]
