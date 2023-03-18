@@ -69,6 +69,12 @@ export class RoomsComponent implements OnInit{
     ]
   }
 
+  selectedRoom! : RoomsList;
+  
+  selectRoom(room: RoomsList) {
+    console.log(room);
+    this.selectedRoom = room;
+  }
 
 
 }
