@@ -28,6 +28,10 @@
     Hold list : [11,12,10,120,...]
 </div>
 
+<div>
+    <button (click)="addRoom()">Book Room</button>
+</div>
+
 <!-- {{roomList | json}} -->
 <!-- <div>
     <table class="table">
@@ -82,4 +86,7 @@
         </table>
     </div>
 </div>
+
 <app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+
+

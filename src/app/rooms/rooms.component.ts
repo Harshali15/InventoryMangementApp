@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DoCheck, OnInit } from '@angular/core';
 import { Rooms, RoomsList } from './rooms';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
-  styleUrls: ['./rooms.component.scss']
+  styleUrls: ['./rooms.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomsComponent implements OnInit{
   constructor() { }
+  // ngDoCheck(): void {
+  //   //console.log('ngDoCheck called')
+  // }
 
   //binding syntax 1- interpolation
   hotelName = 'DoubleTree by Hilton Hotel';
@@ -70,11 +74,27 @@ export class RoomsComponent implements OnInit{
   }
 
   selectedRoom! : RoomsList;
-  
+
   selectRoom(room: RoomsList) {
     console.log(room);
     this.selectedRoom = room;
   }
 
+  addRoom() {
+
+    const room : RoomsList={
+        roomNumber:7,
+        roomType:'Deluxe Master Room',
+        ammenities: '1 King Bed, Wifi included',
+        price: 100,
+        image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
+        checkinTime: new Date(11-11-2021),
+        checkoutTime: new Date(12-11-2021),
+        rating: 5
+    }
+    //this.roomList.push(room);
+    this.roomList = [...this.roomList, room];   //... is the spread operator, here you are creating
+    // a new array with the old array and the new room
+  }
 
 }
