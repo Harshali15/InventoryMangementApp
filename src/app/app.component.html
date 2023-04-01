@@ -1,6 +1,8 @@
 
 <!-- <h1>Hello World from Harshali ! </h1> -->
-<app-rooms></app-rooms>
+
+<!-- say we have to dynamically render this component -->
+<!-- <app-rooms></app-rooms> -->
 
 <!-- demonstrate ngswitch -->
 <!-- <div [ngSwitch]="role">
@@ -10,3 +12,9 @@
     <div *ngSwitchCase="'User'">Welcome User</div>
     <div *ngSwitchDefault>Invalid Role, Unauthorizzed</div>
 </div> -->
+
+<div>
+    <ng-template #user></ng-template>
+</div>
+
+<div #name></div>

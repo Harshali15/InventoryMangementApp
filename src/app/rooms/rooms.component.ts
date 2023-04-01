@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, DoCheck, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
 import { Rooms, RoomsList } from './rooms';
 
 @Component({
@@ -7,8 +8,11 @@ import { Rooms, RoomsList } from './rooms';
   styleUrls: ['./rooms.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RoomsComponent implements OnInit{
+export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
   constructor() { }
+
+  //@ViewChild(HeaderComponent, {static : true}) headerComponent!: HeaderComponent;
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
   // ngDoCheck(): void {
   //   //console.log('ngDoCheck called')
   // }
@@ -38,6 +42,7 @@ export class RoomsComponent implements OnInit{
 
   ngOnInit(): void {
 
+    //console.log(this.headerComponent)  //gives undefined if static is false in the header component
     this.roomList=[
       {
         roomNumber:1,
@@ -73,6 +78,18 @@ export class RoomsComponent implements OnInit{
     ]
   }
 
+  //After the view is initialized, or all components are initialized
+  ngAfterViewInit(): void {
+    this.headerComponent.title = "Rooms View"
+    console.log(this.headerComponent) 
+  }
+
+  //After the view is checked, or all components are checked once, change detection is run once
+  ngAfterViewChecked(): void {
+   //this.headerComponent.title = "Rooms View2"
+    //console.log(this.headerComponent) 
+  }
+
   selectedRoom! : RoomsList;
 
   selectRoom(room: RoomsList) {
@@ -100,5 +117,6 @@ export class RoomsComponent implements OnInit{
   // ngDoCheck(): void {
   //   //console.log('ngDoCheck called')
   // }
+
 
 }
