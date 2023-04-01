@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { Rooms, RoomsList } from './rooms';
 
@@ -13,6 +13,9 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
 
   //@ViewChild(HeaderComponent, {static : true}) headerComponent!: HeaderComponent;
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
+
+  @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
+
   // ngDoCheck(): void {
   //   //console.log('ngDoCheck called')
   // }
@@ -82,6 +85,13 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
   ngAfterViewInit(): void {
     this.headerComponent.title = "Rooms View"
     console.log(this.headerComponent) 
+
+    console.log(this.headerChildrenComponent)
+
+    this.headerChildrenComponent.last.title = "Last Title"
+    // this.headerChildrenComponent.forEach((header) => {
+    //   console.log(header)
+    // }
   }
 
   //After the view is checked, or all components are checked once, change detection is run once
