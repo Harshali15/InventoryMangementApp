@@ -97,4 +97,8 @@ export class RoomsComponent implements OnInit{
     // a new array with the old array and the new room
   }
 
+  // ngDoCheck(): void {
+  //   //console.log('ngDoCheck called')
+  // }
+
 }
