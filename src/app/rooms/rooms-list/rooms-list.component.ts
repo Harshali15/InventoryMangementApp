@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { RoomsList } from '../rooms';
 
 @Component({
@@ -26,6 +26,9 @@ export class RoomsListComponent implements OnInit , OnChanges{
     this.selectedRoom.emit(room);
   }
 
+  ngOnDestroy(): void {
+    console.log("RoomsListComponent destroyed")
+  }
 
 }
 
