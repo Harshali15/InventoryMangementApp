@@ -18,11 +18,13 @@
     [innerText]="numRooms">Number of rooms</div>
 </div>
 
-<button (click)="toggle()">Click Me</button>
+<button (click)="toggle()">Toggle</button>
 
 <!-- ngif instead of hidden as hidden will still render the element in the DOM and it may cause performace issues -->
-<div *ngIf="rooms.availableRooms>0">
+<div *ngIf="hiddenRoom">
     Rooms list : [101,102,110,120,...]
+    <app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+
     <!-- {{roomList}}    displays as object so we use ngfor -->
 </div>
 
@@ -92,6 +94,6 @@
     </div>
 </div>
 
-<app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+<!-- <app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></app-rooms-list> -->
 
 

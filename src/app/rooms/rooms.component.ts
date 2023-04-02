@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { Rooms, RoomsList } from './rooms';
 
@@ -8,7 +8,7 @@ import { Rooms, RoomsList } from './rooms';
   styleUrls: ['./rooms.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
+export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy{
   constructor() { }
 
   //@ViewChild(HeaderComponent, {static : true}) headerComponent!: HeaderComponent;
@@ -129,4 +129,7 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
   // }
 
 
+  ngOnDestroy(): void {
+    console.log("RoomsListComponent destroyed")
+  }
 }
