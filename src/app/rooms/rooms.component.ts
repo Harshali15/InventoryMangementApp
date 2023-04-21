@@ -1,6 +1,7 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { Rooms, RoomsList } from './rooms';
+import { RoomsService } from './services/rooms-service.service';
 
 @Component({
   selector: 'app-rooms',
@@ -9,7 +10,11 @@ import { Rooms, RoomsList } from './rooms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy{
-  constructor() { }
+  
+  constructor(private RoomService : RoomsService) { 
+    //eg of dependency injection
+    this.roomList = this.RoomService.getRooms();
+  }
 
   //@ViewChild(HeaderComponent, {static : true}) headerComponent!: HeaderComponent;
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
@@ -46,39 +51,39 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
   ngOnInit(): void {
 
     //console.log(this.headerComponent)  //gives undefined if static is false in the header component
-    this.roomList=[
-      {
-        roomNumber:1,
-        roomType:'Deluxe Room',
-        ammenities: '1 King Bed, Wifi included',
-        price: 100,
-        image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
-        checkinTime: new Date(11-11-2021),
-        checkoutTime: new Date(12-11-2021),
-        rating: 4.7
-      },
-      {
-        roomNumber:2,
-        roomType:'Queen Room',
-        ammenities: '1 Queen Bed, Wifi included',
-        price: 200,
-        image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
-        checkinTime: new Date(11-11-2021),
-        checkoutTime: new Date(12-11-2021),
-        rating:3.12344
-      },
-      {
-        roomNumber:3,
-        roomType:'Deluxe King Room',
-        ammenities: '1 King Bed, Wifi included, Free Breakfast',
-        price: 1000,
-        image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
-        checkinTime: new Date(11-11-2021),
-        checkoutTime: new Date(12-11-2021),
-        rating:5.0
-      },
+    // this.roomList=[
+    //   {
+    //     roomNumber:1,
+    //     roomType:'Deluxe Room',
+    //     ammenities: '1 King Bed, Wifi included',
+    //     price: 100,
+    //     image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
+    //     checkinTime: new Date(11-11-2021),
+    //     checkoutTime: new Date(12-11-2021),
+    //     rating: 4.7
+    //   },
+    //   {
+    //     roomNumber:2,
+    //     roomType:'Queen Room',
+    //     ammenities: '1 Queen Bed, Wifi included',
+    //     price: 200,
+    //     image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
+    //     checkinTime: new Date(11-11-2021),
+    //     checkoutTime: new Date(12-11-2021),
+    //     rating:3.12344
+    //   },
+    //   {
+    //     roomNumber:3,
+    //     roomType:'Deluxe King Room',
+    //     ammenities: '1 King Bed, Wifi included, Free Breakfast',
+    //     price: 1000,
+    //     image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
+    //     checkinTime: new Date(11-11-2021),
+    //     checkoutTime: new Date(12-11-2021),
+    //     rating:5.0
+    //   },
   
-    ]
+    // ]
   }
 
   //After the view is initialized, or all components are initialized
