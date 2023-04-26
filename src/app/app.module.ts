@@ -10,6 +10,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { APP_CONFIG, APP_CONFIG_SERVICE } from './AppConfig/appconfig.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,12 @@ import { EmployeeComponent } from './employee/employee.component';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide : APP_CONFIG_SERVICE,
+      useValue : APP_CONFIG
+    }
+  ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

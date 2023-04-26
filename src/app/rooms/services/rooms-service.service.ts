@@ -1,5 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { RoomsList } from '../rooms';
+import {environment} from '../../../environments/environment'
+import { APP_CONFIG_SERVICE } from 'src/app/AppConfig/appconfig.service';
+import { AppConfig } from 'src/app/AppConfig/appConfig.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +47,10 @@ export class RoomsService {
     return this.roomsList;
   }
 
-  constructor() { }
+  constructor(@Inject(APP_CONFIG_SERVICE) private config:AppConfig) {
+    // console.log(environment.apiEndpoint)
+    console.log(this.config.apiEndpoint)   //now we are getting value from a value provider instead 
+    //of directly accessing the environment variable
+    console.log('Rooms Service Constructor Called');
+   }
 }
