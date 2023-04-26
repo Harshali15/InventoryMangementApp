@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
+import { localStorageToken } from './localstorage.token';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,8 @@ export class AppComponent implements AfterViewInit, OnInit {
   //role= 'User'
   role= 'Admin'
 
+  constructor(@Inject (localStorageToken) private localStorage: any) { }
+
   @ViewChild('user', {read : ViewContainerRef}) vcr! : ViewContainerRef;
     
   ngAfterViewInit(): void {
@@ -22,6 +25,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('name', {static : true}) name! : ElementRef;
 
   ngOnInit(): void {
+    this.localStorage.setItem('name', 'Hilton Hotel Group') //you can see this on local storage now. dont add anything secure on localstorage as it is not secure     
    // this.name.nativeElement.innerText = "ECENTRAL HOTEL"
   }
 
