@@ -1,5 +1,9 @@
 <!-- binding syntax 1- interpolation , uses {{}} to access the variable-->
 <h1>Welcome to {{hotelName}}</h1>
+<div>
+    <button (click)="addRoom()">Add Room</button>
+</div>
+
 <app-header></app-header>
 <app-header></app-header>
 <app-header></app-header>
@@ -12,13 +16,19 @@
 <div [innerText]="numRooms">Number of rooms</div> -->
 
 <!-- binding syntax3- event binding, uses (eventName) to access the variable -->
-<div [hidden]="hiddenRoom">
+
+
+<!-- <div [hidden]="hiddenRoom">
     Number of rooms :
     <div [ngStyle]="numRooms>0 ? {'color':'green'} : {'color':'red'}"
     [innerText]="numRooms">Number of rooms</div>
-</div>
+</div> -->
 
 <button (click)="toggle()">Toggle</button>
+<button (click)="editRoom()">Edit Room</button>
+<button (click)="deleteRoom()">Delete Room</button>
+
+
 
 <!-- ngif instead of hidden as hidden will still render the element in the DOM and it may cause performace issues -->
 <div *ngIf="hiddenRoom">
@@ -35,9 +45,8 @@
     Hold list : [11,12,10,120,...]
 </div>
 
-<div>
-    <button (click)="addRoom()">Book Room</button>
-</div>
+<h1>{{totalBytes}} Bytes loaded</h1>
+
 
 <!-- {{roomList | json}} -->
 <!-- <div>

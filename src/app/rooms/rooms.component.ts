@@ -3,6 +3,7 @@ import { HeaderComponent } from '../header/header.component';
 import { Rooms, RoomsList } from './rooms';
 import { RoomsService } from './services/rooms-service.service';
 import { Observable } from 'rxjs';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-rooms',
@@ -11,18 +12,20 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy{
-  
+  roomList : RoomsList[]= []
+
   constructor(private RoomService : RoomsService) { 
     //eg of dependency injection
     // this.roomList = this.RoomService.getRooms();
+    
   }
 
-  stream = new Observable((observer) => {
-    observer.next('user 1');
-    observer.next('user 2');
-    observer.next('user 3'); 
-    observer.complete();
-  });
+  // stream = new Observable((observer) => {
+  //   observer.next('user 1');
+  //   observer.next('user 2');
+  //   observer.next('user 3'); 
+  //   observer.complete();
+  // });
 
   //@ViewChild(HeaderComponent, {static : true}) headerComponent!: HeaderComponent;
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
@@ -40,11 +43,14 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
   numRooms = 100
 
   //binding syntax 3- event binding
-  hiddenRoom = false;
+  hiddenRoom = true;
 
   toggle() {
     this.hiddenRoom = !this.hiddenRoom;
   }
+
+  totalBytes = 0
+
 
   //to demonstrate the use of ngIf
   rooms : Rooms = {
@@ -54,21 +60,46 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
     //onholdRooms: 5  //comment to see chaining and null collision
   }
 
-  roomList : RoomsList[]= []
 
   ngOnInit(): void {
-      // this.RoomService.getRooms().subscribe(data => {
-      //     this.roomList = data;
-      //  })
+      this.RoomService.getRooms().subscribe(data => {
+          this.roomList = data;
+       })
+
+       
 
       // this.stream.subscribe((data)=> console.log(data));
 
-      this.stream.subscribe({
-        next: (data) => console.log(data),
-        error: (err) => console.log(err),
-        complete: () => console.log('completed')
-      });
+      // this.stream.subscribe({
+      //   next: (data) => console.log(data),
+      //   error: (err) => console.log(err),
+      //   complete: () => console.log('completed')
+      // });
       
+
+    this.RoomService.getPhotos().subscribe(event=>{
+      switch(event.type) {
+        case HttpEventType.Sent: {
+          console.log('Request has been made!');
+          break;
+        }
+        case HttpEventType.ResponseHeader: {
+          console.log('Request success!')
+          break;
+        }
+        case HttpEventType.DownloadProgress: {
+          this.totalBytes += event.loaded;
+          break;
+        }
+        case HttpEventType.Response: {
+          console.log('Done!', event.body);
+          break;
+        }
+
+      }
+    }
+    );
+
     //console.log(this.headerComponent)  //gives undefined if static is false in the header component
     // this.roomList=[
     //   {
@@ -107,12 +138,12 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
 
   //After the view is initialized, or all components are initialized
   ngAfterViewInit(): void {
-    this.headerComponent.title = "Rooms View"
-    console.log(this.headerComponent) 
+    // this.headerComponent.title = "Rooms View"
+    // console.log(this.headerComponent) 
 
-    console.log(this.headerChildrenComponent)
+    // console.log(this.headerChildrenComponent)
 
-    this.headerChildrenComponent.last.title = "Last Title"
+    // this.headerChildrenComponent.last.title = "Last Title"
     // this.headerChildrenComponent.forEach((header) => {
     //   console.log(header)
     // }
@@ -134,26 +165,53 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
   addRoom() {
 
     const room : RoomsList={
-        roomNumber:'7',
+        roomNumber:'4',
         roomType:'Deluxe Master Room',
         amenities: '1 King Bed, Wifi included',
-        price: 100,
+        price: 1000,
         image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
         checkinTime: new Date(11-11-2021),
         checkoutTime: new Date(12-11-2021),
         rating: 5
     }
     //this.roomList.push(room);
-    this.roomList = [...this.roomList, room];   //... is the spread operator, here you are creating
+   // this.roomList = [...this.roomList, room];   //... is the spread operator, here you are creating
     // a new array with the old array and the new room
+
+    this.RoomService.addRoom(room).subscribe(data => {  //subscribe to the observable
+      this.roomList = data;
+    })
   }
 
   // ngDoCheck(): void {
   //   //console.log('ngDoCheck called')
   // }
 
+  editRoom(){
+    const room : RoomsList={
+      roomNumber:'3',
+      roomType:'Deluxe Master Room',
+      amenities: '1 King Bed, Wifi included',
+      price: 500,
+      image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
+      checkinTime: new Date(11-11-2021),
+      checkoutTime: new Date(12-11-2021),
+      rating: 5
+  }
+
+    this.RoomService.updateRoom(room).subscribe(data => {  //subscribe to the observable
+      this.roomList = data;
+    })
+  }
+
+  deleteRoom(){
+     this.RoomService.deleteRoom('3').subscribe(data => {  //subscribe to the observable  
+      this.roomList = data;
+    })
+    }
+
 
   ngOnDestroy(): void {
-    console.log("RoomsListComponent destroyed")
+    console.log("Rooms Component destroyed")
   }
 }
