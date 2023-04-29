@@ -2,6 +2,7 @@ import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, Do
 import { HeaderComponent } from '../header/header.component';
 import { Rooms, RoomsList } from './rooms';
 import { RoomsService } from './services/rooms-service.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-rooms',
@@ -13,8 +14,15 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
   
   constructor(private RoomService : RoomsService) { 
     //eg of dependency injection
-    this.roomList = this.RoomService.getRooms();
+    // this.roomList = this.RoomService.getRooms();
   }
+
+  stream = new Observable((observer) => {
+    observer.next('user 1');
+    observer.next('user 2');
+    observer.next('user 3'); 
+    observer.complete();
+  });
 
   //@ViewChild(HeaderComponent, {static : true}) headerComponent!: HeaderComponent;
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
@@ -49,7 +57,18 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
   roomList : RoomsList[]= []
 
   ngOnInit(): void {
+      // this.RoomService.getRooms().subscribe(data => {
+      //     this.roomList = data;
+      //  })
 
+      // this.stream.subscribe((data)=> console.log(data));
+
+      this.stream.subscribe({
+        next: (data) => console.log(data),
+        error: (err) => console.log(err),
+        complete: () => console.log('completed')
+      });
+      
     //console.log(this.headerComponent)  //gives undefined if static is false in the header component
     // this.roomList=[
     //   {
@@ -115,9 +134,9 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
   addRoom() {
 
     const room : RoomsList={
-        roomNumber:7,
+        roomNumber:'7',
         roomType:'Deluxe Master Room',
-        ammenities: '1 King Bed, Wifi included',
+        amenities: '1 King Bed, Wifi included',
         price: 100,
         image: 'https://www.hilton.com/im/en/DoubleTree/DoubleTree-By-Hilton-Hotel-Atlanta-Do',
         checkinTime: new Date(11-11-2021),
