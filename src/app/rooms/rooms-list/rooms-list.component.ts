@@ -8,7 +8,7 @@ import { RoomsList } from '../rooms';
 })
 export class RoomsListComponent implements OnInit , OnChanges{
 
-  @Input() rooms: RoomsList[] = [];  //make roomsList a valid input property on app-rooms-list component
+  @Input() rooms: RoomsList[] | null = [];  //make roomsList a valid input property on app-rooms-list component
 
   @Output() selectedRoom = new EventEmitter<RoomsList>(); //make roomsList a valid output property on app-rooms-list component
   constructor() { }

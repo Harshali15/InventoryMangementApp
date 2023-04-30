@@ -4,10 +4,12 @@
     <button (click)="addRoom()">Add Room</button>
 </div>
 
+<!-- <app-header></app-header>
 <app-header></app-header>
-<app-header></app-header>
-<app-header></app-header>
+<app-header></app-header> -->
 
+<!-- now you can see json data on your ui -->
+<!-- {{rooms$ | async |json}}  -->
 
 <p>Located in Heart of Downtown LA!</p>
 
@@ -29,13 +31,15 @@
 <button (click)="deleteRoom()">Delete Room</button>
 
 
-
+<h1>{{getError$ | async}}</h1>
 <!-- ngif instead of hidden as hidden will still render the element in the DOM and it may cause performace issues -->
 <div *ngIf="hiddenRoom">
-    Rooms list : [101,102,110,120,...]
-    <app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+    <div *ngIf="rooms$ | async as rooms">
+        Rooms list : [101,102,110,120,...]
+        <app-rooms-list [rooms]="rooms" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 
-    <!-- {{roomList}}    displays as object so we use ngfor -->
+        <!-- {{roomList}}    displays as object so we use ngfor -->
+    </div>
 </div>
 
 <!-- null collison and optional chainng operator -->

@@ -2,7 +2,7 @@ import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, Do
 import { HeaderComponent } from '../header/header.component';
 import { Rooms, RoomsList } from './rooms';
 import { RoomsService } from './services/rooms-service.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, catchError } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -15,6 +15,20 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
   roomList : RoomsList[]= []
 
   subscription!: Subscription;
+
+  //handling erro
+  error$ = new Subject<string>
+  getError$ = this.error$.asObservable();
+
+
+  rooms$ = this.RoomService.getRooms$.pipe(
+    catchError(err => {
+      this.error$.next(err.message); // dont do this here in your component, use a service instead
+      return [];
+    })
+  )
+
+
   constructor(private RoomService : RoomsService) { 
     //eg of dependency injection
     // this.roomList = this.RoomService.getRooms();
@@ -63,10 +77,10 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
 
 
   ngOnInit(): void {
-    //manually subscribing to the observable
-      this.subscription = this.RoomService.getRooms$.subscribe(rooms => {
-          this.roomList = rooms;
-       })
+    //instead of manually subscribing to the observable, we use async pipe in the template
+      // this.RoomService.getRooms$.subscribe(rooms => {
+      //     this.roomList = rooms;
+      //  })
 
        
 
@@ -214,9 +228,10 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
 
 
   ngOnDestroy(): void {
-    if(this.subscription){
-      this.subscription.unsubscribe();  //unsubsribing and erase the memory
-    }
+    ///you dont need this code, async pipe will do it for you
+    // if(this.subscription){
+    //   this.subscription.unsubscribe();  //unsubsribing and erase the memory
+    // }
     console.log("Rooms Component destroyed")
   }
 }
