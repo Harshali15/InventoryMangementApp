@@ -12,7 +12,7 @@ import { shareReplay } from 'rxjs';
 export class RoomsService {
 
   //getRoom$ i a stream of data, you can modify only stream of data before subscribing to it
-  getRooms$ = this.http.get<RoomsList[]>('/api/room').pipe(
+  getRooms$ = this.http.get<RoomsList[]>('/api/rooms').pipe(
     shareReplay(1)
   )
 

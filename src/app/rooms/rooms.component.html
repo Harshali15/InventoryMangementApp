@@ -31,7 +31,10 @@
 <button (click)="deleteRoom()">Delete Room</button>
 
 
-<h1>{{getError$ | async}}</h1>
+<h1>
+    <!-- {{getError$ | async}} -->
+    {{roomsCount$ | async}} rooms available
+</h1>
 <!-- ngif instead of hidden as hidden will still render the element in the DOM and it may cause performace issues -->
 <div *ngIf="hiddenRoom">
     <div *ngIf="rooms$ | async as rooms">

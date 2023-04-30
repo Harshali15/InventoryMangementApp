@@ -2,7 +2,7 @@ import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, Do
 import { HeaderComponent } from '../header/header.component';
 import { Rooms, RoomsList } from './rooms';
 import { RoomsService } from './services/rooms-service.service';
-import { Observable, Subject, Subscription, catchError } from 'rxjs';
+import { Observable, Subject, Subscription, catchError, map } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -28,6 +28,9 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
     })
   )
 
+  roomsCount$ = this.RoomService.getRooms$.pipe(
+    map((rooms) => rooms.length)
+  )
 
   constructor(private RoomService : RoomsService) { 
     //eg of dependency injection
