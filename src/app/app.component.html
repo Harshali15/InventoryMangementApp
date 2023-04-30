@@ -3,11 +3,11 @@
 
 <!-- say we have to dynamically render this component -->
 <!-- <app-rooms></app-rooms> -->
-<app-container>
+<!-- <app-container>
     <app-rooms></app-rooms>
     <app-employee></app-employee> 
     <h2>Hello from ng-content</h2>
-</app-container>
+</app-container> -->
 
 <!-- demonstrate ngswitch -->
 <!-- <div [ngSwitch]="role">
@@ -23,3 +23,12 @@
 </div>
 
 <div #name></div> -->
+
+<!-- do not use href, it is not a spa it is a mpa , entire page is reloaded when u click these links-->
+<!-- <a [href]="'rooms'">Rooms</a>&nbsp;
+<a [href]="'employees'">Employees</a> -->
+
+<a [routerLink]="'rooms'">Rooms</a>&nbsp;
+<a [routerLink]="'employees'">Employees</a>
+
+<router-outlet></router-outlet>
