@@ -44,6 +44,7 @@ export class RoomsService {
   }
 
   deleteRoom(id: string) {
+    console.log('delete room called')
     return this.http.delete<RoomsList[]>(`/api/rooms/${id}`);
   }
 
