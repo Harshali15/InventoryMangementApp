@@ -3,13 +3,15 @@ import { RoomsList } from '../rooms';
 import { environment } from '../../../environments/environment'
 import { APP_CONFIG_SERVICE } from 'src/app/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomsService {
+
+  // headers = new HttpHeaders ({ token: '12345564654sdgfg'});
 
   //getRoom$ i a stream of data, you can modify only stream of data before subscribing to it
   getRooms$ = this.http.get<RoomsList[]>('/api/rooms').pipe(
