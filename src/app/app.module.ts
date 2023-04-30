@@ -6,14 +6,19 @@ import { AppComponent } from './app.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RoomsListComponent } from './rooms/rooms-list/rooms-list.component';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { APP_CONFIG, APP_CONFIG_SERVICE } from './AppConfig/appconfig.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RequestInterceptor } from './request.interceptor';
+import { InitService } from './init.service';
 
+function initFactory(initService:InitService){
+  return () => initService.init();
+
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +43,12 @@ import { RequestInterceptor } from './request.interceptor';
       provide : HTTP_INTERCEPTORS,
       useClass : RequestInterceptor,
       multi : true
+    },
+    {
+      provide: APP_INITIALIZER, 
+      useFactory: initFactory, 
+      deps: [InitService],
+      multi: true,
     }
   ],
   bootstrap: [AppComponent],

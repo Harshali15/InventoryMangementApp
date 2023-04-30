@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
 import { localStorageToken } from './localstorage.token';
+import { InitService } from './init.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,10 @@ export class AppComponent implements AfterViewInit, OnInit {
   //role= 'User'
   role= 'Admin'
 
-  constructor(@Inject (localStorageToken) private localStorage: any) { }
+  constructor(@Inject (localStorageToken) private localStorage: any, private InitService: InitService) {
+    console.log("Config from app component")
+    console.log(InitService.config)
+   }
 
   @ViewChild('user', {read : ViewContainerRef}) vcr! : ViewContainerRef;
     
