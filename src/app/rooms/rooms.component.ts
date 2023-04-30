@@ -62,8 +62,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
 
 
   ngOnInit(): void {
-      this.RoomService.getRooms().subscribe(data => {
-          this.roomList = data;
+      this.RoomService.getRooms$.subscribe(rooms => {
+          this.roomList = rooms;
        })
 
        
