@@ -2,7 +2,7 @@ import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, Do
 import { HeaderComponent } from '../header/header.component';
 import { Rooms, RoomsList } from './rooms';
 import { RoomsService } from './services/rooms-service.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -14,6 +14,7 @@ import { HttpEventType } from '@angular/common/http';
 export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy{
   roomList : RoomsList[]= []
 
+  subscription!: Subscription;
   constructor(private RoomService : RoomsService) { 
     //eg of dependency injection
     // this.roomList = this.RoomService.getRooms();
@@ -62,7 +63,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
 
 
   ngOnInit(): void {
-      this.RoomService.getRooms$.subscribe(rooms => {
+    //manually subscribing to the observable
+      this.subscription = this.RoomService.getRooms$.subscribe(rooms => {
           this.roomList = rooms;
        })
 
@@ -212,6 +214,9 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
 
 
   ngOnDestroy(): void {
+    if(this.subscription){
+      this.subscription.unsubscribe();  //unsubsribing and erase the memory
+    }
     console.log("Rooms Component destroyed")
   }
 }
