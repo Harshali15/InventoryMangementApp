@@ -1,9 +1,11 @@
 <form>
     <div class="formGroup">
-        <input  type="email" name="name" [(ngModel)]="email" placeholder="Username">
+        <!-- <input color="steelblue" appHover type="email" name="name" [(ngModel)]="email" placeholder="Username"> -->
+        <input appHover="steelblue" type="email" name="name" [(ngModel)]="email" placeholder="Username">
+
     </div>
     <div class="formGroup">
-        <input type="password" name="password"  [(ngModel)]="password" placeholder="Password">
+        <input appHover="lightgreen" type="password" name="password"  [(ngModel)]="password" placeholder="Password">
     </div>
     <div class="formGroup">
         <button class="btn btn-primary" (click)=login()>Login</button>
