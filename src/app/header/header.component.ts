@@ -13,6 +13,6 @@ export class HeaderComponent implements OnInit {
     //throw new Error('Method not implemented.');
   }
 
-  title: string = '';
+  title: string = 'My App';
 
 }
