@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewCh
 import { RoomsComponent } from './rooms/rooms.component';
 import { localStorageToken } from './localstorage.token';
 import { InitService } from './init.service';
+import { ConfigserviceService } from './services/configservice.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,9 @@ export class AppComponent implements AfterViewInit, OnInit {
   //role= 'User'
   role= 'Admin'
 
-  constructor(@Inject (localStorageToken) private localStorage: any, private InitService: InitService) {
+  constructor(@Inject (localStorageToken) private localStorage: any,
+   private InitService: InitService,
+   private configService: ConfigserviceService) {
     console.log("Config from app component")
     console.log(InitService.config)
    }

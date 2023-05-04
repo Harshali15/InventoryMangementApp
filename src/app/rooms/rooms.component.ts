@@ -4,6 +4,7 @@ import { Rooms, RoomsList } from './rooms';
 import { RoomsService } from './services/rooms-service.service';
 import { Observable, Subject, Subscription, catchError, map } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
+import { ConfigserviceService } from '../services/configservice.service';
 
 @Component({
   selector: 'app-rooms',
@@ -32,7 +33,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
     map((rooms) => rooms.length)
   )
 
-  constructor(private RoomService : RoomsService) { 
+  constructor(private RoomService : RoomsService,
+    private configService: ConfigserviceService) { 
     //eg of dependency injection
     // this.roomList = this.RoomService.getRooms();
     
