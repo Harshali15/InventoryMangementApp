@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigserviceService } from '../services/configservice.service';
-import { FormGroup, FormBuilder} from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -15,7 +15,8 @@ export class BookingComponent implements OnInit{
 
   ngOnInit(): void {
     this.bookingForm = this.fb.group({ 
-        roomId: [''], //[''] is a shortcut to new FormControl('')
+        //roomId: [''], //[''] is a shortcut to new FormControl('')
+        roomId: new FormControl({'value':'2', 'disabled':true}),
         guestEmail: [''],
         checkinDate: [''],
         checkoutDate: [''],
@@ -31,6 +32,12 @@ export class BookingComponent implements OnInit{
         guestZipCode: [''],
         guestCount: ['']    
       })
+  }
+
+  Booking(){
+    //console.log(this.bookingForm.value) //this wont give the disabled value
+    console.log(this.bookingForm.getRawValue()) //this will give the disabled value
+
   }
 
 }
