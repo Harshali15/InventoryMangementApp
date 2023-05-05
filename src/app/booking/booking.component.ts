@@ -51,6 +51,28 @@ export class BookingComponent implements OnInit{
   Booking(){
     //console.log(this.bookingForm.value) //this wont give the disabled value
     console.log(this.bookingForm.getRawValue()) //this will give the disabled value
+    
+    this.bookingForm.reset({
+      roomId: '',
+      guestEmail: '',
+      checkinDate: '',
+      checkoutDate: '',
+      bookingstatus: '',
+      bookingAmount: '',
+      bookingDate: '',
+      mobileNumber: '',
+      guestName: '',
+      address: {
+        addressLine1: '',
+        addressLine2: '',
+        City: '',
+        State: '',
+        Country: '',
+        ZipCode: '',
+      }, 
+      guests: [],
+      TnC: false
+    })
 
   }
 
