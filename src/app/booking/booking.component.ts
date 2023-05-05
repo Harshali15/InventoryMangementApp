@@ -25,11 +25,16 @@ export class BookingComponent implements OnInit{
         bookingDate:[''],
         mobileNumber: [''],
         guestName: [''],
-        guestAddress: [''],
-        guestCity: [''],
-        guestState: [''],
-        guestCountry: [''],
-        guestZipCode: [''],
+        address: this.fb.group({
+          addressLine1: [''],
+          addressLine2: [''],
+          City: [''],
+          State: [''],
+          Country: [''],
+          ZipCode: [''],
+        }),
+        // guestAddress: [''],
+        
         guestCount: ['']    
       })
   }
