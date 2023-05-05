@@ -31,12 +31,12 @@ export class BookingComponent implements OnInit{
         mobileNumber: [''],
         guestName: ['',{validators: [Validators.required, Validators.minLength(3)]}],
         address: this.fb.group({
-          addressLine1: [''],
+          addressLine1: ['',{validators: [Validators.required]}],
           addressLine2: [''],
-          City: [''],
-          State: [''],
+          City: ['',{validators: [Validators.required]}],
+          State: ['',{validators: [Validators.required]}],
           Country: [''],
-          ZipCode: [''],
+          ZipCode: ['',{validators: [Validators.required]}],
         }),
         // guestAddress: [''],
         
@@ -81,7 +81,9 @@ export class BookingComponent implements OnInit{
   }
 
   addGuestControl(){
-    return this.fb.group({guestName: [''], age: new FormControl('')})
+    return this.fb.group({
+      guestName: ['',{validators: [Validators.required]}], 
+       age: new FormControl('',{validators: [Validators.required]})})
   }
 
   addPassport(){

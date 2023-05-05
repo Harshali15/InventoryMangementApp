@@ -30,11 +30,17 @@
     <mat-form-field class="example-full-width">
         <mat-label>Name</mat-label>
         <input type="text" matInput formControlName="guestName" placeholder="Enter Guest Name">
+        <mat-error *ngIf="bookingForm.get('guestName')?.hasError('minlength')">
+            Name should be atleast 3 characters long
+        </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
         <mat-label>Email</mat-label>
         <input type="email" matInput formControlName="guestEmail" placeholder="Enter email">
+        <mat-error *ngIf="bookingForm.get('guestEmail')?.hasError('email')">
+            Enter a valid email address
+        </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
@@ -84,6 +90,9 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Address Line 1</mat-label>
                     <input type="text" matInput formControlName="addressLine1" placeholder="Address Line 1">
+                    <mat-error *ngIf="bookingForm.get('address.addressLine1')?.hasError('required')">
+                        Address is <strong>required</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill">
                     <mat-label>Address Line 2</mat-label>
@@ -92,10 +101,16 @@
                 <mat-form-field appearance="fill">
                     <mat-label>City</mat-label>
                     <input type="text" matInput formControlName="City" placeholder="City">
+                    <mat-error *ngIf="bookingForm.get('address.City')?.hasError('required')">
+                        City is <strong>required</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill">
                     <mat-label>State</mat-label>
                     <input type="text" matInput formControlName="State" placeholder="State">
+                    <mat-error *ngIf="bookingForm.get('address.State')?.hasError('required')">
+                        State is <strong>required</strong>
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill">
                     <mat-label>Country</mat-label>
@@ -104,6 +119,9 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Zipcode</mat-label>
                     <input type="number" matInput formControlName="ZipCode" placeholder="ZipCode">
+                    <mat-error *ngIf="bookingForm.get('address.addressLine1')?.hasError('required')">
+                        ZipCode is <strong>required</strong>
+                    </mat-error>
                 </mat-form-field>
 
             </mat-expansion-panel>
@@ -133,10 +151,16 @@
                             <mat-form-field appearance="fill">
                                 <mat-label>Guest Name</mat-label>
                                 <input type="text" matInput formControlName="guestName" placeholder="Guest Name" />
+                                <mat-error *ngIf="bookingForm.get(['guests',i,'guestName'])?.hasError('required')">
+                                    Guest Name is <strong>required</strong>
+                                </mat-error>
                             </mat-form-field>
                             <mat-form-field appearance="fill">
                                 <mat-label>Age</mat-label>
                                 <input type="number" matInput formControlName="age" placeholder="Age" />
+                                <mat-error *ngIf="bookingForm.get(['guests',i,'age'])?.hasError('required')">
+                                    Guest Age is <strong>required</strong>
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div>
