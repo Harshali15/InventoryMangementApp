@@ -41,10 +41,7 @@ export class BookingComponent implements OnInit{
         // guestAddress: [''],
         
         guests: this.fb.array([
-          this.fb.group({
-            guestName: [''],
-            age: new FormControl(''),
-          })
+          this.addGuestControl(),
         ]) 
       })
   }
@@ -56,10 +53,11 @@ export class BookingComponent implements OnInit{
   }
 
   addGuest(){
-    this.guests.push (this.fb.group({
-      guestName: [''],  
-      age: [''],
-    }))
+    this.guests.push (this.addGuestControl())
+  }
+
+  addGuestControl(){
+    return this.fb.group({guestName: [''], age: new FormControl('')})
   }
 
   addPassport(){
