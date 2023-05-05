@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigserviceService } from '../services/configservice.service';
-import { FormGroup, FormBuilder, FormControl} from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormArray} from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -10,6 +10,11 @@ import { FormGroup, FormBuilder, FormControl} from '@angular/forms';
 export class BookingComponent implements OnInit{
 
   bookingForm!: FormGroup
+
+  get guests() {
+     return this.bookingForm.get('guests') as FormArray;
+  }
+
   constructor(private configService: ConfigserviceService,
     private fb: FormBuilder) { }
 
@@ -35,7 +40,12 @@ export class BookingComponent implements OnInit{
         }),
         // guestAddress: [''],
         
-        guestCount: ['']    
+        guests: this.fb.array([
+          this.fb.group({
+            guestName: [''],
+            age: new FormControl(''),
+          })
+        ]) 
       })
   }
 
@@ -43,6 +53,13 @@ export class BookingComponent implements OnInit{
     //console.log(this.bookingForm.value) //this wont give the disabled value
     console.log(this.bookingForm.getRawValue()) //this will give the disabled value
 
+  }
+
+  AddGuest(){
+    this.guests.push (this.fb.group({
+      guestName: [''],  
+      age: [''],
+    }))
   }
 
 }
