@@ -2,7 +2,16 @@
 {{bookingForm.value | json}}
 {{bookingForm.pristine | json}}
 
+<div>
+    <button mat-raised-button color="primary" type="button" (click)="addPassport()">Add Passport</button>
+</div>
+
 <form class="example-form" [formGroup]="bookingForm" (ngSubmit)="Booking()">
+    <mat-form-field *ngIf="bookingForm.get('passport')" class="example-full-width">
+        <mat-label>Passport Number</mat-label>
+        <input type="text" matInput formControlName="passport" placeholder="Passport Number">
+    </mat-form-field>
+
     <mat-form-field class="example-full-width">
         <mat-label>Room Id</mat-label>
         <input type="text" matInput formControlName="roomId" placeholder="Room id">
@@ -35,24 +44,24 @@
 
     <mat-form-field class="example-full-width">
         <mat-label>Check-in Date</mat-label>
-        <input matInput [matDatepicker]="picker1" formControlName="checkinDate">
-        <mat-hint>MM/DD/YYYY</mat-hint>
+        <input matInput [matDatepicker]="picker1" formControlName="checkinDate" placeholder="MM/DD/YYYY">
+        <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
         <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
         <mat-label>Check-out Date</mat-label>
-        <input matInput [matDatepicker]="picker2" formControlName="checkoutDate">
-        <mat-hint>MM/DD/YYYY</mat-hint>
+        <input matInput [matDatepicker]="picker2" formControlName="checkoutDate" placeholder="MM/DD/YYYY">
+        <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
         <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
         <mat-label>Booking Date</mat-label>
-        <input matInput [matDatepicker]="picker3" formControlName="bookingDate">
-        <mat-hint>MM/DD/YYYY</mat-hint>
+        <input matInput [matDatepicker]="picker3" formControlName="bookingDate" placeholder="MM/DD/YYYY">
+        <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
         <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
         <mat-datepicker #picker3></mat-datepicker>
     </mat-form-field>
@@ -96,10 +105,13 @@
         </mat-accordion>
     </div>
 
+    <br>
+
     <div>
-        <button mat-raised-button color="primary" type="button" (click)="AddGuest()">Add Guest</button>
+        <button mat-raised-button color="primary" type="button" (click)="addGuest()">Add Guest</button>
     </div>
 
+    <br>
     <div formArrayName="guests">
         <mat-accordion class="example-headers-align" multi>
             <mat-expansion-panel>
@@ -110,6 +122,9 @@
                 </mat-expansion-panel-header>
                     <div *ngFor="let guest of guests.controls; let i=index">
                         <div [formGroupName]="i">
+                            <div>
+                                <mat-label>Guest {{i+1}} Details:</mat-label>
+                            </div> 
                             <mat-form-field appearance="fill">
                                 <mat-label>Guest Name</mat-label>
                                 <input type="text" matInput formControlName="guestName" placeholder="Guest Name" />
@@ -124,6 +139,7 @@
         </mat-accordion>
     </div>
 
+    <br>
     <div>
         <button mat-raised-button color="primary">Book Room</button>
     </div>
