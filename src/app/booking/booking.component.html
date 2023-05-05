@@ -5,6 +5,11 @@
 <div>
     <button mat-raised-button color="primary" type="button" (click)="addPassport()">Add Passport</button>
 </div>
+<br>
+<div>
+    <button mat-raised-button color="primary" type="button" (click)="deletePassport()">Delete Passport</button>
+</div>
+
 
 <form class="example-form" [formGroup]="bookingForm" (ngSubmit)="Booking()">
     <mat-form-field *ngIf="bookingForm.get('passport')" class="example-full-width">

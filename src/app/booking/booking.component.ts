@@ -66,5 +66,9 @@ export class BookingComponent implements OnInit{
     this.bookingForm.addControl('passport', new FormControl(''))
   }
 
+  deletePassport(){
+    this.bookingForm.removeControl('passport')
+  }
+
 }
  
