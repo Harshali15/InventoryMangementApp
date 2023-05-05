@@ -70,5 +70,9 @@ export class BookingComponent implements OnInit{
     this.bookingForm.removeControl('passport')
   }
 
+  removeGuest(index: number){
+    this.guests.removeAt(index)
+  }
+
 }
  
