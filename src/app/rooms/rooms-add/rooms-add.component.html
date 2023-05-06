@@ -21,7 +21,8 @@
 <form #roomsForm="ngForm" (ngSubmit)="AddRoom(roomsForm)">
     <div class="formGroup">
         <input required class="form-control" type="text" name="roomType"  placeholder="RoomType"
-        [(ngModel)]="room.roomType"/>
+        [(ngModel)]="room.roomType"
+        [ngModelOptions]="{updateOn:'blur'}"/>
     </div>
     <div class="formGroup">
         <input #roomamenities="ngModel" 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigserviceService } from '../services/configservice.service';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators} from '@angular/forms';
+import { BookingService } from './booking.service';
+import { mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-booking',
@@ -16,7 +18,8 @@ export class BookingComponent implements OnInit{
   }
 
   constructor(private configService: ConfigserviceService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private bookingService: BookingService) { }
 
   ngOnInit(): void {
     this.bookingForm = this.fb.group({ 
@@ -45,34 +48,61 @@ export class BookingComponent implements OnInit{
         ]),
 
         TnC: [false, {validators: [Validators.requiredTrue]}],
-      })
+      },
+      // {
+      //   updateOn: 'blur'
+      // }
+      )
+
+      this.getBookingValues()
+
+      // this.bookingForm.valueChanges.subscribe((data)=> {
+      //   console.log(data)
+      //   //not the correct way to do this, inside subsribe we are subscribing to the observable
+      //   this.bookingService.bookRoom(data).subscribe((data)=>{})
+      // }) 
+
+
+      //use switchMap, exhaustMap also instead of mergeMap and check the difference
+      this.bookingForm.valueChanges.pipe(
+        mergeMap((data)=> this.bookingService.bookRoom(data)
+        
+        )).subscribe((data)=>{console.log(data)})
+
   }
 
   Booking(){
     //console.log(this.bookingForm.value) //this wont give the disabled value
     console.log(this.bookingForm.getRawValue()) //this will give the disabled value
     
-    this.bookingForm.reset({
-      roomId: '',
-      guestEmail: '',
-      checkinDate: '',
-      checkoutDate: '',
-      bookingstatus: '',
-      bookingAmount: '',
-      bookingDate: '',
-      mobileNumber: '',
-      guestName: '',
-      address: {
-        addressLine1: '',
-        addressLine2: '',
-        City: '',
-        State: '',
-        Country: '',
-        ZipCode: '',
-      }, 
-      guests: [],
-      TnC: false
-    })
+
+    // this.bookingService.bookRoom(this.bookingForm.value).subscribe((data)=>{
+    //   console.log(data)
+    // })
+
+    // this.bookingForm.reset({
+    //   roomId: '',
+    //   guestEmail: '',
+    //   checkinDate: '',
+    //   checkoutDate: '',
+    //   bookingstatus: '',
+    //   bookingAmount: '',
+    //   bookingDate: '',
+    //   mobileNumber: '',
+    //   guestName: '',
+    //   address: {
+    //     addressLine1: '',
+    //     addressLine2: '',
+    //     City: '',
+    //     State: '',
+    //     Country: '',
+    //     ZipCode: '',
+    //   }, 
+    //   guests: [],
+    //   TnC: false
+    // })
+
+
 
   }
 
@@ -96,6 +126,21 @@ export class BookingComponent implements OnInit{
 
   removeGuest(index: number){
     this.guests.removeAt(index)
+  }
+
+  getBookingValues(){
+
+    //no need to provide all values
+    this.bookingForm.patchValue({
+      roomId: '1',
+      guestEmail: 'har@gmail.com'
+    })
+
+    //need to provide all values
+    // this.bookingForm.setValue({
+    //   roomId: '1',
+    //   guestEmail: '',
+    // })
   }
 
 }
