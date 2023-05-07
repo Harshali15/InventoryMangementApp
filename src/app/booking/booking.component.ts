@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, FormArray, Validators} from '@angu
 import { BookingService } from './booking.service';
 import { mergeMap } from 'rxjs';
 import { CustomValidators } from './validators/custom-validators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -20,12 +21,20 @@ export class BookingComponent implements OnInit{
 
   constructor(private configService: ConfigserviceService,
     private fb: FormBuilder,
-    private bookingService: BookingService) { }
+    private bookingService: BookingService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+     const roomid = this.route.snapshot.paramMap.get('roomId');
+    // console.log('ROOM ID')
+    // console.log(roomid)
+
     this.bookingForm = this.fb.group({ 
         //roomId: [''], //[''] is a shortcut to new FormControl('')
-        roomId: new FormControl({'value':'2', 'disabled':false}, {validators: [Validators.required]}),
+        roomId: new FormControl(
+          {value:roomid,disabled:true}, 
+          {validators: [Validators.required]}
+          ),
         guestEmail: ['', {validators: [Validators.required, Validators.email]}],
         checkinDate: [''],
         checkoutDate: [''],
@@ -132,10 +141,10 @@ export class BookingComponent implements OnInit{
   getBookingValues(){
 
     //no need to provide all values
-    this.bookingForm.patchValue({
-      roomId: '1',
-      guestEmail: 'har@gmail.com'
-    })
+    // this.bookingForm.patchValue({
+    //   roomId: '1',
+    //   guestEmail: 'har@gmail.com'
+    // })
 
     //need to provide all values
     // this.bookingForm.setValue({

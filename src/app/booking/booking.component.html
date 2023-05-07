@@ -184,5 +184,6 @@
     </div>
     <div>
         <button [disabled]="bookingForm.invalid" mat-raised-button color="primary">Book Room</button>
+        {{bookingForm.errors | json}}
     </div>
 </form>

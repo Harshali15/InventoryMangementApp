@@ -28,13 +28,14 @@ export class CustomValidators {
     static validatedate (control: FormGroup) {
         const checkinDate: any = new Date(control.get ('checkinDate')?. value) ;
         const checkoutDate: any = new Date(control.get ('checkoutDate')?. value);
-        const diffTime = checkoutDate- checkinDate;
+        const diffTime = checkoutDate-checkinDate;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        if (diffDays <= 0)
+        if (diffDays <= 0){
             control.get('checkoutDate')?.setErrors({invalidCheckoutDate: true});
              return {
                 invalidate: true, 
-            };
-        return null;
+            }
+        }
+        return true;
         }
 }
