@@ -1,17 +1,17 @@
 <!-- binding syntax 1- interpolation , uses {{}} to access the variable-->
-<h1>Welcome to {{hotelName}}</h1>
-<!-- <div>
+<!-- <h1>Welcome to {{hotelName}}</h1> -->
+<div>
     <button (click)="addRoom()">Add Room</button>
-</div> -->
+</div>
 
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 <!-- <app-header></app-header>
 <app-header></app-header> -->
 
 <!-- now you can see json data on your ui -->
 <!-- {{rooms$ | async |json}}  -->
 
-<p>Located in Heart of Downtown LA!</p>
+<!-- <p>Located in Heart of Downtown LA!</p> -->
 
 <!-- binding syntax2- property binding, uses [propertyName] to access the variable -->
 <!-- Number of rooms :
@@ -31,14 +31,14 @@
 <button (click)="deleteRoom()">Delete Room</button>
 
 
-<h1>
+<!-- <h1> -->
     <!-- {{getError$ | async}} -->
-    {{roomsCount$ | async}} rooms available
-</h1>
+    <!-- {{roomsCount$ | async}} rooms available -->
+<!-- </h1> -->
 <!-- ngif instead of hidden as hidden will still render the element in the DOM and it may cause performace issues -->
 <div *ngIf="hiddenRoom">
     <div *ngIf="rooms$ | async as rooms">
-        Rooms list : [101,102,110,120,...]
+        <!-- Rooms list : [101,102,110,120,...] -->
         <app-rooms-list [rooms]="rooms" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 
         <!-- {{roomList}}    displays as object so we use ngfor -->
@@ -46,13 +46,13 @@
 </div>
 
 <!-- null collison and optional chainng operator -->
-{{rooms.onholdRooms ?? 'No rooms on hold'}}
-
+<!-- {{rooms.onholdRooms ?? 'No rooms on hold'}} -->
+<!-- 
 <div *ngIf = "rooms.onholdRooms">
     Hold list : [11,12,10,120,...]
 </div>
 
-<h1>{{totalBytes}} Bytes loaded</h1>
+<h1>{{totalBytes}} Bytes loaded</h1> -->
 
 <router-outlet></router-outlet>
 

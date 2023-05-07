@@ -16,7 +16,8 @@ import { RouteConfigToken } from '../services/routeConfig.service';
     RoomsComponent,
     RoomsListComponent,
     RoomsBookingComponent,
-    RoomsAddComponent
+    RoomsAddComponent,
+    
   ],
   imports: [
     CommonModule,

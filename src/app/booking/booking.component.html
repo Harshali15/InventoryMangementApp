@@ -1,6 +1,6 @@
-<p>booking works!</p>
+<!-- <p>booking works!</p>
 {{bookingForm.value | json}}
-{{bookingForm.pristine | json}}
+{{bookingForm.pristine | json}} -->
 
 <div>
     <button mat-raised-button color="primary" type="button" (click)="addPassport()">Add Passport</button>
@@ -33,6 +33,7 @@
         <mat-error *ngIf="bookingForm.get('guestName')?.hasError('minlength')">
             Name should be atleast 3 characters long
         </mat-error>
+        {{bookingForm.get('guestName')?.errors | json}}
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
@@ -67,6 +68,9 @@
         <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
         <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf="bookingForm.get('checkoutDate')?.errors">
+            Checkout date cannot be before check-in date
+        </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
