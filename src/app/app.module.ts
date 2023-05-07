@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 // import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
@@ -26,6 +26,7 @@ import { EmailvalidatorDirective } from './emailvalidator/emailvalidator.directi
 import { HeaderModule } from './header/header.module';
 import { RouteConfigToken } from './services/routeConfig.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { GlobalErrorHandler } from './errorhandler.service';
 
 function initFactory(initService:InitService){
   return () => initService.init();
@@ -78,6 +79,10 @@ function initFactory(initService:InitService){
     {
       provide : RouteConfigToken,
       useValue : {title : 'Home'}
+    },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler 
     }
   ],
   bootstrap: [AppComponent],

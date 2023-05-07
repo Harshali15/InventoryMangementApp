@@ -12,6 +12,6 @@ export class CommentService {
    }
 
    getComments(){
-      return this.http.get<Comments[]>('https://jsonplaceholder.typicode.com/comments')
+      return this.http.get<Comments[]>('https://jsonplaceholder.typicode.com/comments231')
     }
 }
